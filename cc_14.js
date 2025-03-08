@@ -21,10 +21,30 @@ function createSupportTicket (name, issue, priority) { // creates function to cr
     ticket.appendChild(priorityLabel); // appends the priority label
     ticket.appendChild(resolveButton); // appends the resolve button
 
+    if (priority === 'High') {  // if ticket is high priority
+        ticket.classList.add('high-priority'); // Add the class 'high-priority'
+    }
     const ticketContainer = document.getElementById('ticketContainer'); //gets the container
     ticketContainer.appendChild(ticket); // appends the tickets
+
+    // Task 3: See bottom of code //
 }
 
-createSupportTicket('Susan', 'Laptop does not work', 'Urgent'); // Test data ticket 1
+createSupportTicket('Susan', 'Laptop does not work', 'High'); // Test data ticket 1
 createSupportTicket('Brian', 'Needs SQL installation', 'Medium'); // Test data ticket 2
 createSupportTicket('Larry', 'Wants a second mouse to use when working remotely', 'Low'); // Test data ticket 3
+
+
+// Task 3: Converting NodeLists to Arrays for Bulk Updates //
+
+function highlightHighPriorityTickets () { // function to highlight high priority tickets
+    const highPriorityTickets = document.querySelectorAll('.high-priority'); // selects all tickets labelled high priority
+    const ticketsArray = Array.from(highPriorityTickets); // converts the node list to an array
+
+    ticketsArray.forEach(ticket => {  // for each high priority ticket
+        ticket.style.backgroundColor = '#FF474C'; // highlights the high priority ticket red
+        ticket.style.border = '2px solid black'; // gives each ticket black border
+    });
+}
+
+highlightHighPriorityTickets(); // calls the function
