@@ -28,6 +28,18 @@ function createSupportTicket (name, issue, priority) { // creates function to cr
     ticketContainer.appendChild(ticket); // appends the tickets
 
     // Task 3: See bottom of code //
+
+    // Task 4: Implementing Ticket Resolution with Event Bubbling //
+
+    resolveButton.addEventListener('click', (event) => {  // adds event listener to the resolve button
+        event.stopPropagation(); // stops propagation
+        ticketContainer.removeChild(ticket); // removes the ticket from the parent upon clicking resolve
+        console.log(`${nameHeader.textContent}'s ticket has been resolved!`); // Message that ticket has been resolved
+    });
+
+    ticketContainer.addEventListener('click', () => { // adds an event listener to the container
+        console.log(`Ticket has been clicked!`); // adds message that any ticket has been clicked
+    });
 }
 
 createSupportTicket('Susan', 'Laptop does not work', 'High'); // Test data ticket 1
