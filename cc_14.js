@@ -21,9 +21,10 @@ function createSupportTicket (name, issue, priority) { // creates function to cr
     ticket.appendChild(priorityLabel); // appends the priority label
     ticket.appendChild(resolveButton); // appends the resolve button
 
-    if (priority === 'High') {  // if ticket is high priority
-        ticket.classList.add('high-priority'); // Add the class 'high-priority'
+    if (priority === 'High') {  // if the priority is high
+        ticket.classList.add('high-priority');  // make the class high priority
     }
+
     const ticketContainer = document.getElementById('ticketContainer'); //gets the container
     ticketContainer.appendChild(ticket); // appends the tickets
 
@@ -39,6 +40,53 @@ function createSupportTicket (name, issue, priority) { // creates function to cr
 
     ticketContainer.addEventListener('click', () => { // adds an event listener to the container
         console.log(`Ticket has been clicked!`); // adds message that any ticket has been clicked
+    });
+
+    // Task 5:  Additional Challenge – Inline Editing of Support Tickets //
+
+    const editButton = document.createElement('button'); // creates edit button
+    editButton.textContent = 'Edit'; // creates text for the button as "Edit"
+    ticket.appendChild(editButton); // Appends the edit button to the card
+
+    editButton.addEventListener('click', () => {  // adds event listener to the edit Button'
+        
+        const nameInput = document.createElement('input'); // creates input for name
+        nameInput.value = nameHeader.textContent; // pre-populates the edit field with the current name
+
+        const issueInput = document.createElement('input'); // creates input for issue
+        issueInput.value = issueParagraph.textContent; // pre-populates the edit field with current issue
+
+        const priorityInput = document.createElement('input'); // creates input for priority
+        priorityInput.value = priorityLabel.textContent; // pre-populates the priority field with current status
+
+        const saveButton = document.createElement('button'); // creates save button
+        saveButton.textContent = 'Save'; // creates text "Save" for the button
+
+        ticket.replaceChild(nameInput, nameHeader); // replaces current text with updated text for name
+        ticket.replaceChild(issueInput, issueParagraph); // replaces current with updated for issue
+        ticket.replaceChild(priorityInput, priorityLabel); // replaces current with updated for priority
+        ticket.replaceChild(saveButton, editButton); // replaces the edit with the save button
+
+        saveButton.addEventListener('click', () => { // adds listener for clicking the save button
+            nameHeader.textContent = nameInput.value; // replaces name header with new input value
+            issueParagraph.textContent = issueInput.value; // replaces position with new input issue
+            priorityLabel.textContent = priorityInput.value; // replaces position with new priority
+
+        if (priorityInput.value === 'High') {  // if ticket is high priority
+            ticket.classList.add('high-priority'); // Add the class 'high-priority'
+        } else {
+            ticket.classList.remove('high-priority'); // Remove the class if it's not 'High'
+        }
+
+        highlightHighPriorityTickets (); // calls the function to highlight the tickets
+
+        ticket.replaceChild(nameHeader, nameInput); // replaces input with updated info for name
+        ticket.replaceChild(issueParagraph, issueInput); // replaces input with updated info for issue
+        ticket.replaceChild(priorityLabel, priorityInput); // replaces input with updated info for priority
+        ticket.replaceChild(editButton, saveButton); // replaces edit button with save button
+        
+        console.log('Ticket details updated.'); // message to confirm updated details
+        });
     });
 }
 
@@ -56,6 +104,14 @@ function highlightHighPriorityTickets () { // function to highlight high priorit
     ticketsArray.forEach(ticket => {  // for each high priority ticket
         ticket.style.backgroundColor = '#FF474C'; // highlights the high priority ticket red
         ticket.style.border = '2px solid black'; // gives each ticket black border
+    });
+
+    const nonHighPriorityTickets = document.querySelectorAll('.support-ticket:not(.high-priority)');  // select all non-high priority tickets
+    const nonHighPriorityArray = Array.from(nonHighPriorityTickets); // creates array for non high priority
+
+    nonHighPriorityArray.forEach(ticket => {  // for each non high priority ticket
+        ticket.style.backgroundColor = ''; // Removes background color
+        ticket.style.border = ''; // Removes border
     });
 }
 

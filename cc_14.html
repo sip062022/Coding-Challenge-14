@@ -10,25 +10,26 @@
 
 <!-- Styling for the header, body, footer, container, and tickets -->
 <style> 
+
     header {  
         font-family: Arial, sans-serif;
          margin: 20px;
          padding: 20px;
          text-align: center;
-    }
-    
+        }
+
     body { 
          font-family: Arial, sans-serif;
          margin: 20px;
          padding: 20px;
-    } 
+        } 
 
     footer {
         font-family: Arial, sans-serif;
          margin: 20px;
          padding: 20px;
          text-align: center;
-    }
+        }
 
     #ticketContainer {
             border: 2px solid #ADD8E6;
@@ -38,11 +39,24 @@
             justify-content: space-around;
         }
 
+     .support-ticket {
+           margin-bottom: 10px;  
+           padding: 10px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+        }
+
+     .support-ticket label {
+           display: block;  
+           margin-bottom: 10px; 
+        }
+
 </style>
 
 <body>
     <header>
         <h1>Customer Support Ticket System</h1>  <!--Adds a header-->
+        <h2>Priority Levels Are: High, Medium, Low</h2> <!--Adds options for priority levels for users-->
     </header>
 
     <main>
